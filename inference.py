@@ -98,7 +98,8 @@ class Network:
         ### Note: You may need to update the function parameters. ###
         return status
 
-    def get_output(self):
+    def get_output(self, request_id, output = None):
         ### TODO: Extract and return the output results
+        self.net_plugin.requests[request_id].outputs[self.output_blob]
         ### Note: You may need to update the function parameters. ###
-        return
+        return self.net_plugin.requests[request_id].outputs[self.output_blob]
