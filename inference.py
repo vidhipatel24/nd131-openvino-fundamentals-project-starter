@@ -47,6 +47,11 @@ class Network:
         ### TODO: Load the model ###
         model_xml = model
         model_bin = os.path.splitext(model_xml)[0] + ".bin"
+        
+        #Intialize plugin
+        self.plugin = IECore()
+        self.network = IENetwork(model = model_xml, weights = model_bin)
+        
         ### TODO: Check for supported layers ###
         ### TODO: Add any necessary extensions ###
         ### TODO: Return the loaded inference plugin ###
