@@ -43,7 +43,7 @@ class Network:
         self.net_plugin = None
         self.infer_request_handle = None
 
-    def load_model(self):
+    def load_model(self, model, device, input_layer, output_layer, infer_request, cpu_ext = None, plugin = None):
         ### TODO: Load the model ###
         model_xml = model
         model_bin = os.path.splitext(model_xml)[0] + ".bin"
