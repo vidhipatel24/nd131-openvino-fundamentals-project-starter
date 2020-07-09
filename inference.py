@@ -68,6 +68,14 @@ class Network:
                 exit(1)
         ### TODO: Add any necessary extensions ###
         ### TODO: Return the loaded inference plugin ###
+        #Load the network into plugin
+        if infer_request == 0:
+            self.net_plugin = self.plugin.load_network(self.network, device)
+        else:
+            self.net_plugin = self.plugin.load_network(self.network, device, infer_request = infer_request)
+        #Get input layer 
+        self.input_blob = next(iter(self.network.inputs))
+        self.output_blob = next(iter(self.network.outputs))
         ### Note: You may need to update the function parameters. ###
         return
 
