@@ -25,7 +25,7 @@
 import os
 import sys
 import logging as log
-from openvino.inference_engine import IENetwork, IECore
+from openvino.inference_engine import IENetwork, IECore, IEPlugin
 
 
 class Network:
