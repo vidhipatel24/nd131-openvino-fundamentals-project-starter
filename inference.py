@@ -52,11 +52,6 @@ class Network:
         self.plugin = IECore()
         self.network = IENetwork(model = model_xml, weights = model_bin)
         
-        #Add CPU extension if applicable
-        if cpu_ext and "CPU" in device:
-            self.plugin.add_extension(cpu_ext, device)
-            print("CPU extension is loaded : {}".format(cpu_ext))
-           
         ### TODO: Check for supported layers ###
         if "CPU" in device:
             supported_layers = self.plugin.query_network(self.network, "CPU")
@@ -66,7 +61,13 @@ class Network:
                 print("Unsupported_layers found: {}".format(unsupported_layers))
                 print("Check whether extension are avaiable to add to IECore.")
                 exit(1)
+              
         ### TODO: Add any necessary extensions ###
+        #Add CPU extension if applicable
+        if cpu_ext and "CPU" in device:
+            self.plugin.add_extension(cpu_ext, device)
+            print("CPU extension is loaded : {}".format(cpu_ext))
+           
         ### TODO: Return the loaded inference plugin ###
         #Load the network into plugin
         if infer_request == 0:
