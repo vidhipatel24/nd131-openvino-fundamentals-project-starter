@@ -52,6 +52,11 @@ class Network:
         self.plugin = IECore()
         self.network = IENetwork(model = model_xml, weights = model_bin)
         
+        #Add CPU extension if applicable
+        if cpu_ext and "CPU" in device:
+            self.plugin.add_extension(cpu_ext, device)
+            print("CPU extension is loaded : {}".format(cpu_ext))
+           
         ### TODO: Check for supported layers ###
         ### TODO: Add any necessary extensions ###
         ### TODO: Return the loaded inference plugin ###
