@@ -58,6 +58,14 @@ class Network:
             print("CPU extension is loaded : {}".format(cpu_ext))
            
         ### TODO: Check for supported layers ###
+        if "CPU" in device:
+            supported_layers = self.plugin.query_network(self.network, "CPU")
+        #Check for unsupported layes, let the user know if something is missing exit the program so
+            unsupported_layers = [l for l in self.network.layers.keys() if l not in supported_layers]
+            if len(unsupported_layers) != 0:
+                print("Unsupported_layers found: {}".format(unsupported_layers))
+                print("Check whether extension are avaiable to add to IECore.")
+                exit(1)
         ### TODO: Add any necessary extensions ###
         ### TODO: Return the loaded inference plugin ###
         ### Note: You may need to update the function parameters. ###
