@@ -78,7 +78,7 @@ class Network:
         self.input_blob = next(iter(self.network.inputs))
         self.output_blob = next(iter(self.network.outputs))
         ### Note: You may need to update the function parameters. ###
-        return
+        return self.plugin , self.get_input_shape()
 
     def get_input_shape(self):
         ### TODO: Return the shape of the input layer ###
