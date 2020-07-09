@@ -91,11 +91,12 @@ class Network:
         ### Note: You may need to update the function parameters. ###
         return self.net_plugin
 
-    def wait(self):
+    def wait(self, request_id):
         ### TODO: Wait for the request to be complete. ###
+        status = self.net_plugin.requests[request_id].wait(-1)
         ### TODO: Return any necessary information ###
         ### Note: You may need to update the function parameters. ###
-        return
+        return status
 
     def get_output(self):
         ### TODO: Extract and return the output results
