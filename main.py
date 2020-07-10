@@ -88,6 +88,12 @@ def infer_on_stream(args, client):
     #Flag for a single imege
     image_flag = False
     
+    #Initialise variables counting people
+    cur_request_id = 0
+    last_count = 0
+    total_count = 0
+    start_time = 0
+    
     # Initialise the class
     infer_network = Network()
     # Set Probability threshold for detections
