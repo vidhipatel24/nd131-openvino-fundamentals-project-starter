@@ -223,7 +223,8 @@ def infer_on_stream(args, client):
         sys.stdout.buffer.write(frame)  
         sys.stdout.flush()
         ### TODO: Write an output image if `single_image_mode` ###
-
+        if image_flag:
+            cv2.imwrite('output_image.jpg', frame)
 
 def main():
     """
