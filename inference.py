@@ -83,6 +83,11 @@ class Network:
     def get_input_shape(self):
         ### TODO: Return the shape of the input layer ###
         return self.network.inputs[self.input_blob].shape
+      
+    def performance_counter(self,request_id):
+        # Query to measure performce per layer 
+        perf_count = self.net_plugin.requests[request_id].get_perf_counts()
+        return perf_count
 
     def exec_net(self, request_id, image):
         ### TODO: Start an asynchronous request ###
