@@ -128,7 +128,8 @@ def infer_on_stream(args, client):
         image = image.reshape((n, c, h, w))
         #print(image.shape)
         ### TODO: Start asynchronous inference for specified request ###
-
+        infer_start = time.time()
+        infer_network.exec_net(cur_request_id, image)
         ### TODO: Wait for the result ###
 
             ### TODO: Get the results of the inference request ###
