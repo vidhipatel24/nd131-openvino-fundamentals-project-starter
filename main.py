@@ -219,7 +219,8 @@ def infer_on_stream(args, client):
                     break
                   
         ### TODO: Send the frame to the FFMPEG server ###
-
+        sys.stdout.buffer.write(frame)  
+        sys.stdout.flush()
         ### TODO: Write an output image if `single_image_mode` ###
 
 
