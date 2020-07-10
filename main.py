@@ -26,6 +26,7 @@ import time
 import socket
 import json
 import cv2
+import numpy as np
 
 import logging as log
 import paho.mqtt.client as mqtt
