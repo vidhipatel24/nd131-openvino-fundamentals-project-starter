@@ -85,13 +85,14 @@ def infer_on_stream(args, client):
     :param client: MQTT client
     :return: None
     """
+    
     # Initialise the class
     infer_network = Network()
     # Set Probability threshold for detections
     prob_threshold = args.prob_threshold
 
     ### TODO: Load the model through `infer_network` ###
-
+    n, c, h, w = infer_network.load_model(args.model, args.device, 1, 1, cur_request_id, args.cpu_extension)[1]
     ### TODO: Handle the input stream ###
 
     ### TODO: Loop until stream is over ###
