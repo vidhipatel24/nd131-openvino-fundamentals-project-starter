@@ -123,7 +123,10 @@ def infer_on_stream(args, client):
             break
         key_pressed = cv2.waitKey(60)
         ### TODO: Pre-process the image as needed ###
-
+        image = cv2.resize(frame, (w, h))
+        image = image.transpose((2,0,1))
+        image = image.reshape((n, c, h, w))
+        #print(image.shape)
         ### TODO: Start asynchronous inference for specified request ###
 
         ### TODO: Wait for the result ###
