@@ -135,6 +135,7 @@ def infer_on_stream(args, client):
     # Initialise the class
     infer_network = Network()
     # Set Probability threshold for detections
+    global prob_threshold
     prob_threshold = args.prob_threshold
 
     ### TODO: Load the model through `infer_network` ###
