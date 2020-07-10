@@ -123,24 +123,30 @@ def infer_on_stream(args, client):
     
     ### TODO: Loop until stream is over ###
     while capture.isOpened():
+     
         ### TODO: Read from the video capture ###
         flag, frame = capture.read()
         if not flag:
             break
         key_pressed = cv2.waitKey(60)
+        
         ### TODO: Pre-process the image as needed ###
         image = cv2.resize(frame, (w, h))
         image = image.transpose((2,0,1))
         image = image.reshape((n, c, h, w))
         #print(image.shape)
+        
         ### TODO: Start asynchronous inference for specified request ###
         infer_start = time.time()
         infer_network.exec_net(cur_request_id, image)
+        
         ### TODO: Wait for the result ###
         if infer_network.wait(cur_request_id) == 0:
             detect_time = time.time() - infer_start
+          
             ### TODO: Get the results of the inference request ###
-
+            result = infer_network.get_output(cur_request_id)
+            
             ### TODO: Extract any desired stats from the results ###
 
             ### TODO: Calculate and send relevant information on ###
