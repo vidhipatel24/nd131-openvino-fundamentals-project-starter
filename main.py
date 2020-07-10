@@ -66,6 +66,8 @@ def build_argparser():
     parser.add_argument("-pt", "--prob_threshold", type=float, default=0.5,
                         help="Probability threshold for detections filtering"
                         "(0.5 by default)")
+    parser.add_argument("-pc", "--perf_counts", type=str, default=False,
+                        help="Print performance counters")
     return parser
 
  def performance_counts(perf_count):
