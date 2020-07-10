@@ -85,6 +85,8 @@ def infer_on_stream(args, client):
     :param client: MQTT client
     :return: None
     """
+    #Flag for a single imege
+    image_flag = False
     
     # Initialise the class
     infer_network = Network()
