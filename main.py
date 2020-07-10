@@ -162,7 +162,24 @@ def infer_on_stream(args, client):
             ### current_count, total_count and duration to the MQTT server ###
             ### Topic "person": keys of "count" and "total" ###
             ### Topic "person/duration": key of "duration" ###
+            if current_count > last_count:
+                start_time = time.time()
+                total_count = total_count + current_count - last_count
+                client.publish("person", json.dumps({"total": total_count}))
 
+                # Person duration in the video is calculated
+                if current_count < last_count:
+                    duration = int(time.time() - start_time)
+
+                client.publish("person/duration",
+                               json.dumps({"duration": duration}))
+
+                client.publish("person", json.dumps({"count": current_count}))
+                last_count = current_count
+
+                if key_pressed == 27:
+                    break
+                  
         ### TODO: Send the frame to the FFMPEG server ###
 
         ### TODO: Write an output image if `single_image_mode` ###
