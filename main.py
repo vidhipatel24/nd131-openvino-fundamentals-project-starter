@@ -131,7 +131,8 @@ def infer_on_stream(args, client):
         infer_start = time.time()
         infer_network.exec_net(cur_request_id, image)
         ### TODO: Wait for the result ###
-
+        if infer_network.wait(cur_request_id) == 0:
+            detect_time = time.time() - infer_start
             ### TODO: Get the results of the inference request ###
 
             ### TODO: Extract any desired stats from the results ###
