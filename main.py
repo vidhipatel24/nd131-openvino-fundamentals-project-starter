@@ -86,6 +86,26 @@ def build_argparser():
                                                           stats['status'],
                                                           stats['real_time']))
     return  
+   
+ def ssd_out(frame, result):
+    """
+    Parse SSD output.
+    :param frame: frame from camera/video
+    :param result: list contains the data to parse ssd
+    :return: person count and frame
+    """
+    current_count = 0
+    # Draw bounding box for object when it's probability is more than the specified threshold
+    for obj in result[0][0]:
+        if obj[2] > prob_threshold:
+            xmin = int(obj[3] * width)
+            ymin = int(obj[4] * height)
+            xmax = int(obj[5] * width)
+            ymax = int(obj[6] * height)
+            # Drawing bounding boxes on the frame 
+            cv2.rectangle(frame, (xmin,ymin), (xmax,ymax), (0, 55, 255), 1)
+            current_count = current_count + 1
+    return frame, current_count
 
 def connect_mqtt():
     ### TODO: Connect to the MQTT client ###
