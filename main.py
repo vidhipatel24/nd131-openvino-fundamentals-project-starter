@@ -95,12 +95,33 @@ def infer_on_stream(args, client):
 
     ### TODO: Load the model through `infer_network` ###
     n, c, h, w = infer_network.load_model(args.model, args.device, 1, 1, cur_request_id, args.cpu_extension)[1]
+    
     ### TODO: Handle the input stream ###
-
+    # Check if input is webcam
+    if args.input == 'CAM':
+        args.input = 0
+    elif args.input.endswith('jpg') or args.input.endswith('.bmp'):
+        image_flag = True
+    # Check for video file
+    else:
+        assert os.path.isfile(args.input), "Specified video input file doesn't exist"  
+    # Get and Open a video capture 
+    capture = cv2.VideoCapture(args.input)
+    capture.open(args.input)
+    if not capture.isOpened():
+        log.error("ERROR! Unable to open video source")
+    #Grab the shape of the input
+    global width, height
+    width = int(capture.get(3))
+    height = int(capture.get(4))
+    
     ### TODO: Loop until stream is over ###
-
+    while capture.isOpened():
         ### TODO: Read from the video capture ###
-
+        flag, frame = capture.read()
+        if not flag:
+            break
+        key_pressed = cv2.waitKey(60)
         ### TODO: Pre-process the image as needed ###
 
         ### TODO: Start asynchronous inference for specified request ###
