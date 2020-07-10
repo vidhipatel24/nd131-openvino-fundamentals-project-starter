@@ -225,6 +225,11 @@ def infer_on_stream(args, client):
         ### TODO: Write an output image if `single_image_mode` ###
         if image_flag:
             cv2.imwrite('output_image.jpg', frame)
+    # Clean Memory      
+    cap.release()
+    cv2.destroyAllWindows()
+    client.disconnect()
+    infer_network.clean()
 
 def main():
     """
