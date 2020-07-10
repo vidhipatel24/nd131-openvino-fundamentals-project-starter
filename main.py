@@ -68,6 +68,22 @@ def build_argparser():
                         "(0.5 by default)")
     return parser
 
+ def performance_counts(perf_count):
+    """
+    print information about layers of the model.
+    :param perf_count: Dictionary consists of status of the layers.
+    :return: None
+    """
+    print("{:<70} {:<15} {:<15} {:<15} {:<10}".format('name', 'layer_type',
+                                                      'exec_type', 'status',
+                                                      'real_time, us'))
+    for layer, stats in perf_count.items():
+        print("{:<70} {:<15} {:<15} {:<15} {:<10}".format(layer,
+                                                          stats['layer_type'],
+                                                          stats['exec_type'],
+                                                          stats['status'],
+                                                          stats['real_time']))
+    return  
 
 def connect_mqtt():
     ### TODO: Connect to the MQTT client ###
