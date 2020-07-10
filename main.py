@@ -148,7 +148,16 @@ def infer_on_stream(args, client):
             result = infer_network.get_output(cur_request_id)
             
             ### TODO: Extract any desired stats from the results ###
-
+            if args.perf_counts:
+                perf_count = infer_network.performance_counter(cur_request_id)
+                performance_counts(perf_count)
+            # Calculating Inference Time
+            frame, current_count = ssd_out(frame,result)
+            Infer_time_message = "Inference Time : {:.3f}ms"\
+                                .format(detect_time * 1000)
+            cv2.putText(frame, Infer_time_message, (15,15),
+                        cv2.FONT_HERSHEY_COMPLEX, 0.5, (200, 10, 10), 1) 
+            
             ### TODO: Calculate and send relevant information on ###
             ### current_count, total_count and duration to the MQTT server ###
             ### Topic "person": keys of "count" and "total" ###
