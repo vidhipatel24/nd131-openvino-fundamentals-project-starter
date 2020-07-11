@@ -210,7 +210,7 @@ def infer_on_stream(args, client):
                 if current_count < last_count:
                     duration = int(time.time() - start_time)
 
-                client.publish("person/duration",
+                    client.publish("person/duration",
                                json.dumps({"duration": duration}))
 
                 client.publish("person", json.dumps({"count": current_count}))
